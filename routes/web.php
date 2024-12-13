@@ -17,6 +17,7 @@ Route::get('/import-news', function () {
     $places = DB::table('places')
         ->get();
     foreach ($items as $item) {
+
         $title = [
             'ka' => $item->title_ka,
             'en' => $item->title_en,
@@ -27,6 +28,7 @@ Route::get('/import-news', function () {
         ];
         $publishDate = new DateTime($item->date . ' ' . $item->time);
         $category_id = null;
+//        no need to search category. from seeded categories where inserted with same ID as it was on LIVE/OLD
         if (empty($item->categories_id)){
             $category_id = $item->category_id;
         }else{
@@ -48,14 +50,18 @@ Route::get('/import-news', function () {
         ]);
         if ($item->popular) {
             $popular_place = $places->where('id', 1)->first();
-            $new_news->places()->attach($popular_place->id);
+            $new_news->places()->syncWithoutDetaching($popular_place->id);
         }
         if ($item->newest) {
             $newest_place = $places->where('id',  2)->first();
-            $new_news->places()->attach($newest_place->id);
+            $new_news->places()->syncWithoutDetaching($newest_place->id);
         }
         if(!is_null($category_id)){
-            $new_news->categories()->attach($category_id);
+            $new_news->categories()->syncWithoutDetaching($category_id);
+        }
+        $image_base_url = 'https://www.businessinsider.ge/img/product';
+        if (!empty($data['img'])) {
+            $new_news->addMediaFromUrl($image_base_url.'/'.$item->image)->toMediaCollection('news');
         }
     }
 

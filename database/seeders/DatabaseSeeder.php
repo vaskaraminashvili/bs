@@ -22,13 +22,6 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
-        User::factory()->create([
-            'name' => 'Admin',
-            'email' => 'admin@admin.com',
-            'role' => UserRoles::Admin,
-            'password' => bcrypt('password'),
-        ]);
-
         Place::factory()->create([
             'title' => 'Popular',
             'status' => 1,
@@ -36,6 +29,50 @@ class DatabaseSeeder extends Seeder
         Place::factory()->create([
             'title' => 'Slider',
             'status' => 0,
+        ]);
+
+        //        insert categories from old project and repeat same id as it was there
+        $categories = DB::table('categories_live')
+            ->orderBy('sort', 'desc')
+            ->get();
+        foreach ($categories as $category) {
+            $hidden = intval(!$category->main);
+            $parent = Category::create([
+                "id" => $category->id,
+                "title" => [
+                    "ka" => $category->title_ka,
+                    "en" => $category->title_en
+                ],
+                "slug" => str()->slug($category->title_en),
+                "description" => [
+                    "ka" => $category->title_ka . " category description",
+                    "en" => $category->title_en . " category description"
+                ],
+                "hidden" => $hidden,
+                "status" => true,
+                "sort" => $category->sort,
+            ]);
+        }
+
+
+        //        insert user from old project
+        $users = DB::table('admins')
+            ->orderBy('id', 'asc')
+            ->get();
+        foreach ($users as $user) {
+            User::factory()->create([
+                'name' => $user->name,
+                'email' => \Str::slug($user->name, '_') . '@bpi.ge',
+                'role' => UserRoles::Admin,
+                'password' => bcrypt('password'),
+            ]);
+        }
+
+        User::factory()->create([
+            'name' => 'Admin',
+            'email' => 'admin@admin.com',
+            'role' => UserRoles::Admin,
+            'password' => bcrypt('password'),
         ]);
 
     }
