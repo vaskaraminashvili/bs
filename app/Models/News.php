@@ -99,6 +99,7 @@ class News extends Model implements HasMedia
                 ->maxLength(255),
             Forms\Components\Select::make('author_id')
                 ->relationship('author', 'name')
+                ->default(auth()->id())
                 ->required(),
             Forms\Components\Select::make('status')
                 ->options(NewsStatus::class)
@@ -106,6 +107,8 @@ class News extends Model implements HasMedia
             Forms\Components\DateTimePicker::make('publish_date')
                 ->native(false)
                 ->seconds(false)
+                ->default(now())
+                ->minDate(now()->startOfDay())
                 ->required(),
             SpatieMediaLibraryFileUpload::make('img')
                 ->collection('news')

@@ -45,7 +45,12 @@ class NewsResource extends Resource
                     ->width('auto')
                     ->square()
                     ->collection('news')
-                    ->defaultImageUrl('https://www.businessinsider.ge/img/bi.png'),
+                    ->defaultImageUrl('https://www.businessinsider.ge/img/bi.png')
+                ->tooltip(function ($record){
+                    if ($record->views > 0){
+                        return 'ნახვები : ' . $record->views;
+                    }
+                }),
                 Tables\Columns\TextColumn::make('title')
                     ->limit(40)
                     ->tooltip(function (TextColumn $column): ?string {

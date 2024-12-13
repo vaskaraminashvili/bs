@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
         ]);
         Place::factory()->create([
             'title' => 'Slider',
-            'status' => 0,
+            'status' => 1,
         ]);
 
         //        insert categories from old project and repeat same id as it was there
