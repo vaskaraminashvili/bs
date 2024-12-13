@@ -50,8 +50,9 @@ class News extends Model implements HasMedia
     protected $casts
         = [
             'id' => 'integer',
+            'status' => NewsStatus::class,
             'author_id' => 'integer',
-            'publish_date' => 'timestamp',
+            'publish_date' => 'datetime',
             'deleted_at' => 'timestamp',
         ];
 

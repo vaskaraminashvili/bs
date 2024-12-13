@@ -5,12 +5,15 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\NewsResource\Pages;
 use App\Filament\Resources\NewsResource\RelationManagers;
 use App\Models\News;
+use Carbon\Carbon;
 use Filament\Forms\Form;
 use Filament\Resources\Concerns\Translatable;
 use Filament\Resources\Resource;
+use Filament\Support\Enums\Alignment;
 use Filament\Tables;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
 class NewsResource extends Resource
@@ -37,17 +40,40 @@ class NewsResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('title')
-                    ->searchable(),
                 SpatieMediaLibraryImageColumn::make('img')
+                    ->alignment(Alignment::Center)
+                    ->width('auto')
                     ->square()
-                    ->collection('news'),
+                    ->collection('news')
+                    ->defaultImageUrl('https://www.businessinsider.ge/img/bi.png'),
+                Tables\Columns\TextColumn::make('title')
+                    ->limit(40)
+                    ->tooltip(function (TextColumn $column): ?string {
+                        $state = $column->getState();
+
+                        if (strlen($state) <= $column->getCharacterLimit()) {
+                            return null;
+                        }
+
+                        // Only render the tooltip if the column content exceeds the length limit.
+                        return $state;
+                    })
+                    ->searchable(),
+
                 Tables\Columns\TextColumn::make('author.name')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('status')
+                    ->badge()
+                    ->color(function ($state) {
+                        return $state->getColor();
+                    })
                     ->searchable(),
                 Tables\Columns\TextColumn::make('publish_date')
+                    ->badge()
+                    ->color(function ($state) {
+                         return $state->isBefore(now()) ? 'success' : 'warning';
+                    })
                     ->dateTime()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('deleted_at')
@@ -74,7 +100,7 @@ class NewsResource extends Resource
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ])
-            ->defaultSort('id', 'desc');
+            ->defaultSort('publish_date', 'desc');
     }
 
     public static function getRelations(): array
