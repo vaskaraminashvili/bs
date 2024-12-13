@@ -14,11 +14,14 @@ class NewsImportService
     }
 
     public function import(){
+        ini_set('memory_limit', '2048M');
+        set_time_limit(3000);
+        ini_set('max_execution_time', 3000);
         $items = DB::table('production')
             ->select('*')
             ->join('category_production', 'production.id', '=', 'category_production.production_id')
             ->orderBy('id', 'desc')
-            ->limit(10) //for testing
+            ->limit(1000) //for testing
             ->get();
         $places = DB::table('places')
             ->get();
