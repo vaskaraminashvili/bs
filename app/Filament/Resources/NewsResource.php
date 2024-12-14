@@ -46,11 +46,11 @@ class NewsResource extends Resource
                     ->square()
                     ->collection('news')
                     ->defaultImageUrl('https://www.businessinsider.ge/img/bi.png')
-                ->tooltip(function ($record){
-                    if ($record->views > 0){
-                        return 'ნახვები : ' . $record->views;
-                    }
-                }),
+                    ->tooltip(function ($record){
+                        if ($record->views > 0){
+                            return 'ნახვები : ' . $record->views;
+                        }
+                    }),
                 Tables\Columns\TextColumn::make('title')
                     ->limit(40)
                     ->tooltip(function (TextColumn $column): ?string {
@@ -77,7 +77,7 @@ class NewsResource extends Resource
                 Tables\Columns\TextColumn::make('publish_date')
                     ->badge()
                     ->color(function ($state) {
-                         return $state->isBefore(now()) ? 'success' : 'warning';
+                        return $state->isBefore(now()) ? 'success' : 'warning';
                     })
                     ->dateTime()
                     ->sortable(),
@@ -104,8 +104,7 @@ class NewsResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ])
-            ->defaultSort('publish_date', 'desc');
+            ])->defaultSort('publish_date', 'desc');;
     }
 
     public static function getRelations(): array

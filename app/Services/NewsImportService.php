@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Enums\NewsStatus;
+use App\Models\News;
 use DateTime;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
@@ -13,7 +14,7 @@ class NewsImportService
     {
     }
 
-    public function import(){
+    public function import($download_images = false){
         ini_set('memory_limit', '2048M');
         set_time_limit(3000);
         ini_set('max_execution_time', 3000);
@@ -68,8 +69,30 @@ class NewsImportService
             if(!is_null($category_id)){
                 $new_news->categories()->syncWithoutDetaching($category_id);
             }
-            $image_base_url = 'https://www.businessinsider.ge/img/product/'.$item->image;
-            $this->downloadImage($new_news, $image_base_url);
+            if ($download_images){
+                $image_base_url = 'https://www.businessinsider.ge/img/product/'.$item->image;
+                $this->downloadImage($new_news, $image_base_url);
+            }
+
+        }
+    }
+
+    public function downloadImagesForNews(){
+        ini_set('memory_limit', '2048M');
+        set_time_limit(3000);
+        ini_set('max_execution_time', 3000);
+        $items = News::query()
+            ->orderBy('id')
+            ->limit(100) //for testing
+            ->get();
+
+        foreach ($items as $item) {
+            $original_news = DB::table('production')
+                ->select('*')
+                ->where('slug', $item->slug)
+                ->first();
+            $image_base_url = 'https://www.businessinsider.ge/img/product/'.$original_news->image;
+            $this->downloadImage($item, $image_base_url);
 
         }
     }

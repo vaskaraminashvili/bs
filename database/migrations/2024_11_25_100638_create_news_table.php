@@ -26,6 +26,7 @@ return new class extends Migration {
             $table->timestamp('publish_date');
             $table->softDeletes();
             $table->timestamps();
+            $table->index(['publish_date', 'deleted_at'], 'idx_publish_date_deleted_at');
         });
 
         Schema::enableForeignKeyConstraints();

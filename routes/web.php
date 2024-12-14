@@ -10,6 +10,8 @@ Route::get('/', function () {
 
 Route::get('/import-news', function () {
     $newsImportService = new NewsImportService();
-    $newsImportService->import();
+//    $newsImportService->import();
+//    donwload images for first 100
+    $newsImportService->downloadImagesForNews();
 
 });
