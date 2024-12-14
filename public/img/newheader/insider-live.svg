@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="364" height="39" viewBox="0 0 364 39">
+  <g id="Group_121" data-name="Group 121" transform="translate(-1241 -232)">
+    <g id="Group_110" data-name="Group 110" transform="translate(19 -136.673)">
+      <g id="Group_104" data-name="Group 104" transform="translate(1222 368.673)">
+        <g id="Rectangle_262" data-name="Rectangle 262" transform="translate(0 0)" fill="#fd6420" stroke="#fd6420" stroke-width="1">
+          <rect width="364" height="39" stroke="none"/>
+          <rect x="0.5" y="0.5" width="363" height="38" fill="none"/>
+        </g>
+        <text id="insider_live" data-name="insider    live" transform="translate(170 26)" fill="#fff" font-size="17" font-family="SegoeUI, Segoe UI"><tspan x="-55.897" y="0" xml:space="preserve">INSIDER    LIVE</tspan></text>
+      </g>
+      <circle id="Ellipse_38" data-name="Ellipse 38" cx="4" cy="4" r="4" transform="translate(1404 384.673)" fill="red"/>
+    </g>
+  </g>
+</svg>

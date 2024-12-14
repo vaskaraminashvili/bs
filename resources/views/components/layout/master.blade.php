@@ -3,18 +3,16 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- admixer -->
 
-    <title>title here</title>
-    {{--    <title>@yield('title')</title>--}}
-    {{--    <meta itemprop="name" content="@yield('title')">--}}
-    {{--    <meta itemprop="description" content="@yield('description')">--}}
-    {{--    <meta itemprop="image" content="@yield('image')">--}}
-    {{--    <meta name="description" content="@yield('description')">--}}
-    {{--    <meta name="keywords" content="@yield('keywords')">--}}
+    <title>{{$data['title'] ?? 'BS' }} - Business Insider</title>
+    <meta itemprop="name" content="{{$data['title'] ?? '' }}"/>
+    <meta itemprop="description" content="{{$data['description'] ?? '' }}"/>
+    <meta itemprop="image" content="{{$data['image'] ?? '' }}"/>
+    <meta name="description" content="{{$data['description'] ?? '' }}"/>
+    <meta name="keywords" content="{{$data['keywords'] ?? '' }}"/>
     <meta name="copyright" content="https://www.businessinsider.ge/ka">
     <meta name="author" content="ProService">
     <meta name="country" content="Georgia">
@@ -23,15 +21,15 @@
     <meta name="contactStreetAddress1" content='Georgia, Tbilisi'>
     <meta name="contactCity" content="Tbilisi">
     <meta name="contactCountry" content="Georgia">
-    {{--    <meta name="linkage" content="@yield('linkage')">--}}
+    <meta name="linkage" content="{{$data['linkage'] ?? ''}}">
 
 
     <meta property="og:type" content="website"/>
-    {{--    <meta property="og:title" content="@yield('title')"/>--}}
-    {{--    <meta property="og:description" content="@yield('description')"/>--}}
-    {{--    <meta property="og:image" content="@yield('image')"/>--}}
-    {{-- <meta property="og:image" content="img/metas/fb_im.png"/> --}}
-    {{--    <meta property="og:url" content="@yield('url')"/>--}}
+    <meta property="og:title" content="{{$data['title'] ?? ''}}"/>
+    <meta property="og:description" content="{{$data['description'] ?? ''}}"/>
+    <meta property="og:image" content="{{$data['image'] ?? ''}}"/>
+    <meta property="og:image" content="img/metas/fb_im.png"/>
+    <meta property="og:url" content="{{$data['url'] ?? ''}}"/>
     <meta property="og:site_name" content="{{env('APP_NAME')}}"/>
     <meta property="og:see_also" content="{{env('APP_URL')}}"/>
     <meta name="linkedin:owner" content="business-insider-georgia">
@@ -39,23 +37,23 @@
 
     <meta name="twitter:card" content="summary"/>
     <meta name="twitter:site" content="{{env('APP_NAME')}}"/>
-    {{--    <meta name="twitter:title" content="@yield('title')">--}}
-    {{--    <meta name="twitter:description" content="@yield('description')"/>--}}
+    <meta name="twitter:title" content="{{$data['title'] ?? ''}}">
+    <meta name="twitter:description" content="{{$data['description'] ?? ''}}"/>
     <meta name="twitter:creator" content="{{env('APP_NAME')}}"/>
-    {{--    <meta name="twitter:image:src" content="@yield('image')"/>--}}
+    <meta name="twitter:image:src" content="{{$data['image'] ?? ''}}"/>
     <meta name="twitter:domain" content="{{env('APP_URL')}}"/>
 
-    {{-- <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('img/log.jpg') }}"> --}}
+     <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('img/log.jpg') }}">
 
-{{--    <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('img/bi.png') }}">--}}
-{{--    <link rel="apple-touch-icon" sizes="60x60" href="{{ asset('img/bi.png') }}">--}}
-{{--    <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('img/bi.png') }}">--}}
-{{--    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('img/bi.png') }}">--}}
-{{--    <link rel="apple-touch-icon" sizes="114x114" href="{{ asset('img/bi.png') }}">--}}
-{{--    <link rel="apple-touch-icon" sizes="120x120" href="{{ asset('img/bi.png') }}">--}}
-{{--    <link rel="apple-touch-icon" sizes="144x144" href="{{ asset('img/bi.png') }}">--}}
-{{--    <link rel="apple-touch-icon" sizes="152x152" href="{{ asset('img/bi.png') }}">--}}
-{{--    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('img/bi.png') }}">--}}
+    <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('img/bi.png') }}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{{ asset('img/bi.png') }}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('img/bi.png') }}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('img/bi.png') }}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{ asset('img/bi.png') }}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{{ asset('img/bi.png') }}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{{ asset('img/bi.png') }}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{ asset('img/bi.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('img/bi.png') }}">
 
 
     <link rel="shortcut icon" href="{{ asset('img/bi.png') }}" type="image/x-icon">
@@ -86,6 +84,7 @@
     <link rel="stylesheet" href="{{ asset('css/responsive.css?v=1.0') }}">
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
     @stack('styles')
+    {{ $styles ?? '' }}
     <script src="{{ asset('js/modernizr-3.5.0.min.js') }}"></script>
 
     <script src="{{ asset('js/jquery-1.12.4.min.js') }}"></script>

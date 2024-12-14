@@ -4,7 +4,10 @@ use App\Services\NewsImportService;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    $data = [
+        'title' => 'Home',
+    ];
+    return view('welcome', compact('data'));
 });
 
 

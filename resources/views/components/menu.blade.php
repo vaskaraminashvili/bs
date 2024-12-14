@@ -274,44 +274,7 @@
                         </div>
                         <div class="main-menu">
                             <nav id="mobile-menu" style="display: block;">
-                                <style>
-                                    @media (max-width: 1000px) {
-                                        #mobile-menu {
-                                            display: none;
 
-                                        }
-                                    }
-
-                                </style>
-                                <style media="screen">
-                                    .currency__container {
-                                        display: flex;
-                                        flex-direction: row;
-                                        justify-content: center;
-                                        align-items: center;
-                                        width: 700px;
-                                    }
-
-                                    .currency__block {
-                                        display: flex;
-                                        flex-direction: row;
-                                        justify-content: center;
-                                        align-items: center;
-                                        margin-right: 15px;
-                                    }
-
-                                    .currency__img {
-                                        width: 25px;
-                                        height: 25px;
-                                        object-fit: cover;
-                                        margin: 0 5px;
-                                        border-radius: 60px;
-                                    }
-
-                                    .currency__info {
-                                        margin: 0;
-                                    }
-                                </style>
                                 <ul>
                                     <li><a href="/"><i class="lnr lnr-home"></i></a></li>
                                     <li class=""><a href="https://www.businessinsider.ge/products/27">ეკონომიკა</a></li>
@@ -353,203 +316,42 @@
         </script>
     </div>
 </header>
-
-@if (app()->getLocale() == 'en')
-    <style>
-        body,
-        .main-menu li > a,
-        .last__news__header__title,
-        .news__header__title,
-        .weekend .logo::after,
-        .education_news__header__title,
-        .personal_news__header__title,
-        .popular_news__header__title,
-        .new-videos--title,
-        .new-videos--title + a,
-        .podcast__title,
-        .podcast__title a,
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'OldStandard-regular', 'hm';
-        }
-    </style>
-@endif
-
-<style>
-    .categories-menu-btn {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 22px;
-        color: #fd6420;
-        padding-top: 13px;
-        padding-bottom: 13px;
-    }
-
-    .top-nav {
-        display: none;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-
-        color: #FFF;
-        height: 50px;
-        padding: 1em;
-    }
-
-    .menu {
-        display: flex;
-        flex-direction: row;
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-    }
-
-    .menu > li {
-        margin: 0 1rem;
-        overflow: hidden;
-    }
-
-    .menu-button-container {
-        display: none;
-        height: 100%;
-        width: 30px;
-        cursor: pointer;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-
-    #menu-toggle {
-        display: none;
-    }
-
-    .menu-button,
-    .menu-button::before,
-    .menu-button::after {
-        display: block;
-        background-color: #bcbdbf;
-        position: absolute;
-        height: 4px;
-        width: 30px;
-        transition: transform 400ms cubic-bezier(0.23, 1, 0.32, 1);
-        border-radius: 2px;
-    }
-
-    .menu-button::before {
-        content: '';
-        margin-top: -8px;
-    }
-
-    .menu-button::after {
-        content: '';
-        margin-top: 8px;
-    }
-
-    #menu-toggle:checked + .menu-button-container .menu-button::before {
-        margin-top: 0px;
-        transform: rotate(405deg);
-    }
-
-    #menu-toggle:checked + .menu-button-container .menu-button {
-        background: rgba(255, 255, 255, 0);
-    }
-
-    #menu-toggle:checked + .menu-button-container .menu-button::after {
-        margin-top: 0px;
-        transform: rotate(-405deg);
-    }
-
-    @media (min-width: 1000px) {
-        header .for-mobile {
-            display: none;
-        }
-
-    }
-
-    @media (max-width: 1000px) {
-        .flexed {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100% !important;
-            max-width: 100% !important;
-            z-index: 1010;
-            flex: unset;
-        }
-
-        .top-nav a, .top-nav a:visited {
-            color: white;
-            transition: 0.4s ease;
-        }
-
-        .top-nav a:hover {
-            transition: 0.4s ease;
-            color: #fd6420;
-        }
-
-        .top-nav {
-            display: flex;
-        }
-
-        .menu-button-container {
-            display: flex;
-        }
-
-        .menu {
-            position: absolute;
-            top: 0;
-            margin-top: 100px;
-            left: 0;
-            flex-direction: column;
-            width: 100%;
-            justify-content: center;
-            align-items: center;
-        }
-
-        #menu-toggle ~ .menu li {
-            height: 0;
-            margin: 0;
-            padding: 0;
-            border: 0;
-            transition: height 400ms cubic-bezier(0.23, 1, 0.32, 1);
-        }
-
-        #menu-toggle:checked ~ .menu li {
-            border: 1px solid #bcbdbf;
-            height: 2.5em;
-            padding: 0.5em;
-            transition: height 400ms cubic-bezier(0.23, 1, 0.32, 1);
-        }
-
-        .menu > li {
-            display: flex;
-            justify-content: center;
-            margin: 0;
-            padding: 0.5em 0;
-            width: 100%;
-            color: #bcbdbf;
-            background-color: #222;
-        }
-
-        .menu > li:not(:last-child) {
-            border-bottom: 1px solid #bcbdbf;
-        }
-    }
-</style>
+@push('styles')
+    @if (app()->getLocale() == 'en')
+        <style>
+            body,
+            .main-menu li > a,
+            .last__news__header__title,
+            .news__header__title,
+            .weekend .logo::after,
+            .education_news__header__title,
+            .personal_news__header__title,
+            .popular_news__header__title,
+            .new-videos--title,
+            .new-videos--title + a,
+            .podcast__title,
+            .podcast__title a,
+            h1, h2, h3, h4, h5, h6 {
+                font-family: 'OldStandard-regular', 'hm';
+            }
+        </style>
+    @endif
+@endpush
 
 
-<script>
-    let languager = document.querySelector('#language-switcher');
-    if (window.location.href.includes('/ka')) {
-        languager.innerHTML = ` <a href='https://www.businessinsider.ge/en' class="active">
+@push('scripts')
+    <script>
+        let languager = document.querySelector('#language-switcher');
+        if (window.location.href.includes('/ka')) {
+            languager.innerHTML = ` <a href='https://www.businessinsider.ge/en' class="active">
                                 <img src='https://www.businessinsider.ge/img/gbp_flag.png'/>
                             </a>`
 
-    } else {
-        languager.innerHTML = ` <a href='https://www.businessinsider.ge/ka' class="active">
+        } else {
+            languager.innerHTML = ` <a href='https://www.businessinsider.ge/ka' class="active">
                                 <img src='https://www.businessinsider.ge/img/Flag_of_Georgia.svg.webp'/>
                             </a>`
-    }
+        }
+    </script>
+@endpush
 
-
-</script>
