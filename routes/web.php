@@ -10,6 +10,13 @@ Route::get('/', function () {
     return view('welcome', compact('data'));
 });
 
+Route::get('/{slug}/news', function ($slug) {
+   return 'category page';
+})->name('category-slug');
+
+Route::get('/news/', function ($slug) {
+    return 'category page';
+})->name('news-index');
 
 Route::get('/import-news', function () {
     $newsImportService = new NewsImportService();

@@ -34,7 +34,6 @@ class Category extends Model
         'title' => 'array',
         'description' => 'array',
         'status' => 'boolean',
-        'hidden' => 'boolean',
         'deleted_at' => 'timestamp',
     ];
 
